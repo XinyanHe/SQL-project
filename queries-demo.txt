@@ -1,0 +1,26 @@
+-------------------- Q1--------------------
+------ The percentage of jobs which have the same category for rating and salary ------
+
+ total_num | same_category |    percentage    
+-----------+---------------+------------------
+      3469 |          1585 | 0.45690400691842
+(1 row)
+
+-------------------- Q2 --------------------
+------ Find city with the max average salary ------
+
+ avg_salary |    city    | average_across_city 
+------------+------------+---------------------
+        126 | Marin City |     72.594482037109
+(1 row)
+
+-------------------- Q3 --------------------
+------ Summary of each category of headquaters, including the name of the category and its total count. ------
+
+       category        | totalnum 
+-----------------------+----------
+ highSalaryHighRevenue |       92
+ highSalaryLowRevenue  |      268
+ lowSalaryHighRevenue  |      124
+ lowSalaryLowRevenue   |      312
+(4 rows)
