@@ -1,0 +1,241 @@
+csc343h-hexinya1=> \i schema.ddl
+psql:schema.ddl:1: NOTICE:  drop cascades to 14 other objects
+DETAIL:  drop cascades to type project.rating
+drop cascades to type project.ownership
+drop cascades to type project.founded
+drop cascades to type project.size
+drop cascades to type project.salarylowerbound
+drop cascades to type project.salaryupperbound
+drop cascades to type project.revenuelowerbound
+drop cascades to type project.revenueupperbound
+drop cascades to table project.location
+drop cascades to table project.sector
+drop cascades to table project.headquarters
+drop cascades to table project.company
+drop cascades to table project.job
+drop cascades to table project.competition
+DROP SCHEMA
+CREATE SCHEMA
+SET
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE DOMAIN
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+
+csc343h-hexinya1=> \i clean_data.sql
+CREATE TABLE
+COPY 1851
+DELETE 886
+DELETE 147
+DELETE 0
+COPY 818
+CREATE TABLE
+COPY 1838
+DELETE 243
+DELETE 10
+DELETE 26
+DELETE 763
+COPY 796
+CREATE TABLE
+COPY 497
+DELETE 141
+DELETE 34
+COPY 322
+CREATE TABLE
+COPY 5470
+DELETE 2001
+COPY 3469
+DROP TABLE
+DROP TABLE
+DROP TABLE
+DROP TABLE
+csc343h-hexinya1=> \COPY Location from 'Location.csv' delimiter ',' csv
+COPY 571
+csc343h-hexinya1=> \COPY Sector from 'Sector.csv' delimiter ',' csv
+COPY 89
+csc343h-hexinya1=> \COPY Headquarters from 'Head_clean.csv' delimiter ',' csv
+COPY 818
+csc343h-hexinya1=> \COPY Company from 'Company_clean.csv' delimiter ',' csv
+COPY 796
+csc343h-hexinya1=> \COPY Job from 'Job_clean.csv' delimiter ',' csv
+COPY 3469
+csc343h-hexinya1=> \COPY Competition from 'Competition_clean.csv' delimiter ',' csv 
+COPY 322
+csc343h-hexinya1=> \d
+             List of relations
+ Schema  |     Name     | Type  |  Owner   
+---------+--------------+-------+----------
+ project | company      | table | hexinya1
+ project | competition  | table | hexinya1
+ project | headquarters | table | hexinya1
+ project | job          | table | hexinya1
+ project | location     | table | hexinya1
+ project | sector       | table | hexinya1
+(6 rows)
+
+
+csc343h-hexinya1=> select count(*) from company;
+ count 
+-------
+   796
+(1 row)
+
+csc343h-hexinya1=> select * from company where CompanyID < 20;
+ companyid |                name                | rating | locationid |           ownership            | headid 
+-----------+------------------------------------+--------+------------+--------------------------------+--------
+         0 | Vera Institute of Justice          |   3.20 |          0 | Nonprofit Organization         |      0
+         1 | Visiting Nurse Service of New York |   3.80 |          0 | Nonprofit Organization         |      1
+         3 | Celerity                           |   4.10 |          0 | Subsidiary or Business Segment |      3
+         4 | FanDuel                            |   3.90 |          0 | Company - Private              |      4
+         7 | GNY Insurance Companies            |   3.70 |          0 | Company - Private              |      7
+         8 | DMGT                               |   4.00 |          0 | Company - Public               |      8
+        10 | NYU Langone Health                 |   4.00 |          0 | Hospital                       |     10
+        12 | Montefiore Medical                 |   3.70 |          0 | Nonprofit Organization         |     12
+        13 | Known                              |   3.00 |          0 | Company - Private              |     13
+        14 | Advisor Group                      |   3.40 |          2 | Company - Private              |     14
+        17 | NYSTEC                             |   3.80 |          0 | Nonprofit Organization         |     17
+        18 | Education Development Center, Inc. |   3.90 |          0 | Nonprofit Organization         |     18
+(12 rows)
+
+csc343h-hexinya1=> select count(*) from competition;
+ count 
+-------
+   322
+(1 row)
+
+csc343h-hexinya1=> select * from Competition where aID < 510;
+ aid | bid  
+-----+------
+  45 |   59
+  59 |   45
+  87 | 1480
+ 104 |   84
+ 170 |  482
+ 502 |  893
+ 502 | 1238
+ 502 | 1479
+ 502 | 1520
+ 502 | 1769
+ 415 |  415
+ 415 | 1598
+ 442 | 1226
+(13 rows)
+
+csc343h-hexinya1=> select count(*) from job;
+ count 
+-------
+  3469
+(1 row)
+
+csc343h-hexinya1=> select jobID, companyID, title, sectorID, salaryLB, salaryUB, substring(description,1,10) as subdescription
+csc343h-hexinya1-> from Job
+csc343h-hexinya1-> where jobid < 30;
+ jobid | companyid |                         title                         | sectorid | salarylb | salaryub | subdescription 
+-------+-----------+-------------------------------------------------------+----------+----------+----------+----------------
+     0 |         0 | Data Analyst, Center on Immigration and Justice (CIJ) |        0 |    37.00 |    66.00 | Are you ea
+     1 |         1 | Quality Data Analyst                                  |        1 |    37.00 |    66.00 | Overview      +
+       |           |                                                       |          |          |          |               +
+       |           |                                                       |          |          |          | 
+     3 |         3 | Data Analyst                                          |        3 |    37.00 |    66.00 | Requisitio
+     4 |         4 | Reporting Data Analyst                                |        4 |    37.00 |    66.00 | ABOUT FAND
+     7 |         7 | Data Science Analyst                                  |        6 |    37.00 |    66.00 | Data Scien
+     8 |         8 | Data Analyst                                          |        7 |    37.00 |    66.00 | The Data A
+    10 |        10 | Data Analyst                                          |        1 |    37.00 |    66.00 | NYU Grossm
+    12 |        12 | DATA ANALYST                                          |        1 |    37.00 |    66.00 | Job Summar
+    13 |        13 | Senior Data Analyst                                   |       10 |    37.00 |    66.00 | About Know
+    14 |        14 | Investment Advisory Data Analyst                      |       11 |    37.00 |    66.00 | Investment
+    18 |        17 | Clinical Data Analyst                                 |       13 |    37.00 |    66.00 | About Us:     +
+       |           |                                                       |          |          |          | 
+    19 |        18 | DATA PROGRAMMER/ANALYST                               |        8 |    37.00 |    66.00 | Company De
+    24 |        22 | Data Analyst - Intex Developer                        |        5 |    37.00 |    66.00 | Data Analy
+    29 |        26 | Data + Business Intelligence Analyst                  |        2 |    37.00 |    66.00 | We are bui
+(14 rows)
+
+csc343h-hexinya1=> select count(*) from headquarters;
+ count 
+-------
+   818
+(1 row)
+
+csc343h-hexinya1=> select * from headquarters where headID < 30;
+ headid | found | locationid | revenuelb | revenueub |          size           
+--------+-------+------------+-----------+-----------+-------------------------
+      0 |  1961 |          0 |    100.00 |    500.00 | 201 to 500 employees
+      1 |  1893 |          0 |      2.00 |   5000.00 | 10000+ employees
+      3 |  2002 |        253 |     50.00 |    100.00 | 201 to 500 employees
+      4 |  2009 |          0 |    100.00 |    500.00 | 501 to 1000 employees
+      7 |  1914 |          0 |    100.00 |    500.00 | 201 to 500 employees
+      8 |  1896 |        255 |      1.00 |   2000.00 | 5001 to 10000 employees
+     10 |  1841 |          0 |      5.00 |  10000.00 | 10000+ employees
+     12 |  1884 |         13 |      2.00 |   5000.00 | 10000+ employees
+     13 |  2004 |          0 |    100.00 |    500.00 | 201 to 500 employees
+     14 |  2016 |        116 |      1.00 |      5.00 | 1001 to 5000 employees
+     17 |  1996 |        257 |     25.00 |     50.00 | 51 to 200 employees
+     18 |  1958 |        258 |    100.00 |    500.00 | 501 to 1000 employees
+     22 |  1969 |        259 |      5.00 |  10000.00 | 10000+ employees
+     26 |  2011 |        261 |     10.00 |     25.00 | 201 to 500 employees
+(14 rows)
+
+csc343h-hexinya1=> select count(*) from location;
+ count 
+-------
+   571
+(1 row)
+
+csc343h-hexinya1=> select * from location where locationID < 15;
+ locationid |       city       | state 
+------------+------------------+-------
+          0 | New York         | NY
+          1 | Fairfield        | NJ
+          2 | Jersey City      | NJ
+          3 | Brooklyn         | NY
+          4 | Weehawken        | NJ
+          5 | Long Island City | NY
+          6 | Florham Park     | NJ
+          7 | Manhasset        | NY
+          8 | Newark           | NJ
+          9 | Queens Village   | NY
+         10 | Haworth          | NJ
+         11 | Fort Lee         | NJ
+         12 | South Plainfield | NJ
+         13 | Bronx            | NY
+         14 | Little Ferry     | NJ
+(15 rows)
+
+csc343h-hexinya1=> select count(*) from sector;
+ count 
+-------
+    89
+(1 row)
+
+csc343h-hexinya1=> select * from sector where sectorID < 15;
+ sectorid |               name                |               industry                
+----------+-----------------------------------+---------------------------------------
+        0 | Non-Profit                        | Social Assistance
+        1 | Health Care                       | Health Care Services & Hospitals
+        2 | Information Technology            | Internet
+        3 | Information Technology            | IT Services
+        4 | Arts, Entertainment & Recreation  | Sports & Recreation
+        5 | Finance                           | Investment Banking & Asset Management
+        6 | Insurance                         | Insurance Carriers
+        7 | Finance                           | Venture Capital & Private Equity
+        8 | Business Services                 | Research & Development
+        9 | NULL                              | NULL
+       10 | Business Services                 | Advertising & Marketing
+       11 | Finance                           | Brokerage Services
+       12 | Business Services                 | Building & Personnel Services
+       13 | Business Services                 | Consulting
+       14 | Restaurants, Bars & Food Services | Casual Restaurants
+(15 rows)
+
+
